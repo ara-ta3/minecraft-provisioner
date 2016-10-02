@@ -1,0 +1,44 @@
+{
+    "variables": {
+        "ami_id": "ami-0919cd68",
+        "vpc_id": "",
+        "subnet_id": "",
+        "security_group_ids": []
+    },
+
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "name": "ami-minecraft",
+            "ami_name": "dark-minecraft-{{timestamp}}",
+            "tags": {
+                "type": "dark-minecraft"
+            },
+
+            "region": "ap-northeast-1",
+            "source_ami": "{{user `ami_id`}}",
+            "instance_type": "t2.micro",
+            "vpc_id": "{{user `vpc_id`}}",
+            "subnet_id": "{{user `subnet_id`}}",
+            "security_group_ids": "{{user `security_group_ids`}}",
+            "associate_public_ip_address": true,
+            "ssh_username": "ubuntu",
+            "ssh_timeout": "5m"
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "./scripts.tar.gz",
+            "destination": "/tmp/script.tar.gz"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "cd /tmp/; tar xzvf scripts.tar.gz",
+                "sudo make -C /tmp/script"
+            ]
+        }
+    ]
+}
