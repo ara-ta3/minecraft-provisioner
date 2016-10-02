@@ -1,11 +1,16 @@
 all: /etc/systemd/system/minecraft.service
 
-/opt/minecraft_server.jar:
-		wget -O $@ https://s3.amazonaws.com/Minecraft.Download/versions/1.10.2/minecraft_server.1.10.2.jar
+/opt/minecraft_server.jar:/opt/forge-installer
+	java -jar $< --installServer
+	mv -f minecraft_server.1.10.2.jar $@
+
+/opt/forge-installer:
+	wget -O $@ https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.10.2-12.18.1.2094/forge-1.10.2-12.18.1.2094-installer.jar
 
 /home/minecraft: minecraft
 		mkdir -p $@
-		chown minecraft:minecraft $@
+		mkdir -p $@/mods
+		chown -R minecraft:minecraft $@
 
 minecraft:
 		id -u $@ > /dev/null || adduser $@
