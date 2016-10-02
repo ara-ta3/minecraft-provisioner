@@ -3,7 +3,7 @@
         "ami_id": "ami-0919cd68",
         "vpc_id": "",
         "subnet_id": "",
-        "security_group_ids": []
+        "security_group_ids": ""
     },
 
     "builders": [
@@ -20,7 +20,7 @@
             "instance_type": "t2.micro",
             "vpc_id": "{{user `vpc_id`}}",
             "subnet_id": "{{user `subnet_id`}}",
-            "security_group_ids": "{{user `security_group_ids`}}",
+            "security_group_ids": ["{{user `security_group_ids`}}"],
             "associate_public_ip_address": true,
             "ssh_username": "ubuntu",
             "ssh_timeout": "5m"
@@ -31,13 +31,19 @@
         {
             "type": "file",
             "source": "./scripts.tar.gz",
-            "destination": "/tmp/script.tar.gz"
+            "destination": "/tmp/scripts.tar.gz"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo apt install make"
+            ]
         },
         {
             "type": "shell",
             "inline": [
                 "cd /tmp/; tar xzvf scripts.tar.gz",
-                "sudo make -C /tmp/script"
+                "sudo make -C /tmp/scripts"
             ]
         }
     ]

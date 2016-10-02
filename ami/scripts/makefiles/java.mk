@@ -1,4 +1,4 @@
 all: java
 
 java:
-		apt install openjdk-8-jre-headless
+		apt-get install -y openjdk-8-jre-headless

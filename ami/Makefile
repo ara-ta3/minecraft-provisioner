@@ -3,12 +3,14 @@
 PACKER=$(shell which packer)
 packer_template=./packer.json
 var_file=packer_var_file.json
+opt=
 
 packer_validate:
 	$(PACKER) validate $(packer_template)
 
 packer_build: scripts.tar.gz
 	$(PACKER) build \
+		$(opt) \
 		-var-file=$(var_file) \
 		$(packer_template)
 

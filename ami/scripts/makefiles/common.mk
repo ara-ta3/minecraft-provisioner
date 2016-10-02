@@ -2,7 +2,7 @@ all: timezone package
 
 package:
 	apt update
-	apt upgrade
+	apt-get -y upgrade
 
 timezone:
 	echo "Asia/Tokyo" > /etc/timezone    
