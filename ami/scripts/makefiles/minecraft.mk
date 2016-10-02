@@ -9,7 +9,6 @@ all: /etc/systemd/system/minecraft.service
 
 minecraft:
 		id -u $@ > /dev/null || adduser $@
-		@echo "minecraft"|passwd --stdin $@
 
 /etc/systemd/system/minecraft.service:/opt/minecraft_server.jar /home/minecraft
 		echo "$$minecraft_service" > $@
