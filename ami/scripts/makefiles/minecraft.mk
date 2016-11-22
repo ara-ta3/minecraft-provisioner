@@ -2,10 +2,10 @@ all: /etc/systemd/system/minecraft.service
 
 /opt/minecraft_server.jar:/opt/forge-installer
 	java -jar $< --installServer
-	mv -f minecraft_server.1.10.2.jar $@
+	mv -f minecraft_server.1.11.jar $@
 
 /opt/forge-installer:
-	wget -O $@ https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.10.2-12.18.1.2094/forge-1.10.2-12.18.1.2094-installer.jar
+	wget -O $@ https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.11-13.19.0.2154/forge-1.11-13.19.0.2154-installer.jar
 
 /home/minecraft: minecraft
 		mkdir -p $@
