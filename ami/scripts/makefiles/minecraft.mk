@@ -3,7 +3,7 @@ all: /etc/systemd/system/minecraft.service
 /opt/minecraft_server.jar:/opt/forge-installer
 	mkdir -p /opt/mods
 	cd /opt && java -jar $< --installServer
-	mv -f minecraft_server.1.11.jar $@
+	mv -f forge-1.11-13.19.0.2154-universal.jar $@
 
 /opt/forge-installer:
 	wget -O $@ https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.11-13.19.0.2154/forge-1.11-13.19.0.2154-installer.jar
