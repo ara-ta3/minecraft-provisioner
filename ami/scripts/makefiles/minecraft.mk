@@ -1,7 +1,8 @@
 all: /etc/systemd/system/minecraft.service
 
 /opt/minecraft_server.jar:/opt/forge-installer
-	java -jar $< --installServer
+	mkdir -p /opt/mods
+	cd /opt && java -jar $< --installServer
 	mv -f minecraft_server.1.11.jar $@
 
 /opt/forge-installer:
